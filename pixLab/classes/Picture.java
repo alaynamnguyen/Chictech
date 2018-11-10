@@ -93,12 +93,38 @@ public class Picture extends SimplePicture
 	
 	public void grayscale()
 	{
-		
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels)
+		{
+			for (Pixel pixelObj : rowArray)
+			{
+				int ave = (pixelObj.getBlue() + pixelObj.getRed() + pixelObj.getGreen())
+						/ 3;
+				pixelObj.setBlue(ave);
+				pixelObj.setRed(ave);
+				pixelObj.setGreen(ave);
+			}
+		}
 	}
 
 
 	public void Photoshop(Picture newPic){
+	  Pixel[][] newPixels = newPic.getPixels2D();
+	  Pixel[][] pixels = this.getPixels2D();
 	  
+	  for (int row = 0; row < newPixels.length; row++){
+	      for (int col = 0; col <= newPixels[0].length-1; col++){
+	    	  
+	    
+	    	 int red = newPixels[row][col].getRed();
+	    	 int green = newPixels[row][col].getGreen();
+	    	 int blue= newPixels[row][col].getBlue();
+
+	    	 if(green > red  && green > blue ) {
+	    		 newPixels[row][col].setColor(pixels[row][col].getColor());
+    		 }
+	      }
+	 } 
   }
 
 
